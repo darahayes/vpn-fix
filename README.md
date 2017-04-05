@@ -16,7 +16,7 @@ $ git clone https://github.com/darahayes/vpn-fix
 
 ### Whitelist
 
-Open whitelist.txt and add in IP addresses and/or hosts you want to access through the VPN **One per each line**.
+Copy `whitelist.sample.txt` to `whitelist.txt` and add in IP addresses and/or hosts you want to access through the VPN **One per each line**.
 
 e.g.
 
