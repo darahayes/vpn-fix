@@ -1,5 +1,7 @@
 # vpn-fix
 
+![demo](http://recordit.co/7PSGvdZTkT)
+
 Do you use a (**insert favourite curse word here**) corporate VPN? Does it route all of your traffic and slow your life down?
 
 This tool will fix that problem in less than five minutes...
