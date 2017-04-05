@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+dir=$(cd `dirname $0` && pwd)
+
+echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.profile
+
+echo 'alias created. Run source ~/.profile and then run vpnfix'

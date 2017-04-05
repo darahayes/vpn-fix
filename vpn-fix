@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+
+# You might need to this
+iface=en0
+
+dir=$(cd `dirname $0` && pwd)
+# function to get absolute path of a file/dir
+abspath() {
+  echo $(cd ${1%/*} && echo $PWD/${1##*/})
+}
+
+host_whitelist_file=$(abspath $1)
+
+if [ -z $host_whitelist_file ]; then
+  echo "please specify a whitelist file"
+  exit 1
+fi
+
+echo "Removing Fortinet's route all the things rule"
+route -n delete default -interface ppp0
+
+echo "Now route all the things through normal connection!"
+route add default -interface $iface
+
+echo "Now route only things in your whitelist through VPN"
+host_whitelist=($(cat $host_whitelist_file))
+ip_whitelist=()
+
+for host in ${host_whitelist[*]}
+do
+  if [[ $host =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "Adding $host to whitelist"
+    ip_whitelist+=($host)
+  else
+    echo "Adding IP addresses for $host to whitelist"
+    temp_list=($(dig +short $host))
+    for ip in ${temp_list[*]}
+    do
+      ip_whitelist+=($ip)
+    done
+  fi
+done
+
+
+for address in ${ip_whitelist[*]}
+do
+  route add $address -interface ppp0
+done
