@@ -1,6 +1,6 @@
 # vpn-fix
 
-![demo](http://recordit.co/7PSGvdZTkT)
+![demo](http://g.recordit.co/7PSGvdZTkT.gif)
 
 Do you use a (**insert favourite curse word here**) corporate VPN? Does it route all of your traffic and slow your life down?
 
