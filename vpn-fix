@@ -17,13 +17,9 @@ if [ -z $host_whitelist_file ]; then
   exit 1
 fi
 
-echo "Removing Fortinet's route all the things rule"
 route -n delete default -interface ppp0
-
-echo "Now route all the things through normal connection!"
 route add default -interface $iface
 
-echo "Now route only things in your whitelist through VPN"
 host_whitelist=($(cat $host_whitelist_file))
 ip_whitelist=()
 
