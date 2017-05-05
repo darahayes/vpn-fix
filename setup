@@ -2,6 +2,6 @@
 
 dir=$(cd `dirname $0` && pwd)
 
-echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.profile
+echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.bash_profile
 
-echo 'alias created. Run source ~/.profile and then run vpnfix'
+echo "'vpnfix' alias created in ~/.bash_profile. Reopen your terminal window or run 'source ~/.bash_profile' and then run 'vpnfix'"
