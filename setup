@@ -2,6 +2,29 @@
 
 dir=$(cd `dirname $0` && pwd)
 
-echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.bash_profile
+shell=$(echo $SHELL | awk -F'/' '{print $NF}')
+case $shell in
+  bash)
+  echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.bash_profile
+  echo "'vpnfix' alias created in ~/.bash_profile. Reopen your terminal window or run 'source ~/.bash_profile' and then run 'vpnfix'"
+  ;;
 
-echo "'vpnfix' alias created in ~/.bash_profile. Reopen your terminal window or run 'source ~/.bash_profile' and then run 'vpnfix'"
+  fish)
+  fish -c "function vpnfix --description 'Fix the VPN'
+    sudo $dir/vpn-fix $dir/whitelist.txt
+  end; and funcsave vpnfix"
+  echo "'vpnfix' function created. Reload fish or reopen your terminal window and then run 'vpnfix'"
+  ;;
+
+  zsh)
+  echo "alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'" >> ~/.zshrc
+  echo "'vpnfix' alias created in ~/.zshrc. Reopen your terminal window or run 'source ~/.zshrc' and then run 'vpnfix'"
+  ;;
+
+  *)
+  echo "Unknown shell!"
+  echo "Try creating an alias simiar to"
+  echo "   alias vpnfix='sudo $dir/vpn-fix $dir/whitelist.txt'"
+  ;;
+
+esac
