@@ -25,7 +25,7 @@ ip_whitelist=()
 
 for host in ${host_whitelist[*]}
 do
-  if [[ $host =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  if [[ $host =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(|\/[0-9]+)$ ]]; then
     echo "Adding $host to whitelist"
     ip_whitelist+=($host)
   else
@@ -41,5 +41,9 @@ done
 
 for address in ${ip_whitelist[*]}
 do
-  route add $address -interface ppp0
+  if [[ $address =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+$ ]]; then
+    route add -net $addresss -interface pp0
+  else
+    route add $address -interface ppp0
+  fi
 done
